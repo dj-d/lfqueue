@@ -2,7 +2,7 @@
 #define __LFQ_H__
 #include "cross-platform.h"
 
-#include <stdalign.h>  // C11
+// #include <stdalign.h>  // C11
 
 struct lfq_node{
 	void * data;
@@ -14,7 +14,7 @@ struct lfq_node{
 };
 
 struct lfq_ctx{
-	alignas(64)	volatile struct lfq_node  * volatile head;
+	// alignas(64)	volatile struct lfq_node  * volatile head;
 	int volatile count;
 	volatile struct lfq_node * * HP;
 	volatile int * tid_map;
@@ -23,7 +23,7 @@ struct lfq_ctx{
 	volatile struct lfq_node * volatile fpt; // free pool tail
 	int MAXHPSIZE;
 
-	alignas(64) volatile struct lfq_node  * volatile tail;  // in another cache line to avoid contention
+	// alignas(64) volatile struct lfq_node  * volatile tail;  // in another cache line to avoid contention
 };
 
 int lfq_init(struct lfq_ctx *ctx, int max_consume_thread);
