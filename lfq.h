@@ -15,6 +15,7 @@ struct lfq_node{
 
 struct lfq_ctx{
 	// alignas(64)	volatile struct lfq_node  * volatile head;
+	volatile struct lfq_node  * volatile head;
 	int volatile count;
 	volatile struct lfq_node * * HP;
 	volatile int * tid_map;
@@ -24,6 +25,7 @@ struct lfq_ctx{
 	int MAXHPSIZE;
 
 	// alignas(64) volatile struct lfq_node  * volatile tail;  // in another cache line to avoid contention
+	volatile struct lfq_node  * volatile tail;  // in another cache line to avoid contention
 };
 
 int lfq_init(struct lfq_ctx *ctx, int max_consume_thread);
